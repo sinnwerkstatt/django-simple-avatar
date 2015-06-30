@@ -32,7 +32,8 @@ register.simple_tag(avatar_url)
 
 def avatar(user, size=80):
     alt = unicode(user)
-    url = avatar_url(user, size)
+    # always use default avatar size and let browser handle resizes
+    url = avatar_url(user) 
     return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt, 
             size, size)
 register.simple_tag(avatar)
