@@ -5,6 +5,7 @@ from hashlib import md5
 from django import template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.utils.safestring import mark_safe
 
 from simpleavatar.settings import AVATAR_DEFAULT_URL, AVATAR_GRAVATAR_BACKUP, AVATAR_GRAVATAR_DEFAULT
 from simpleavatar.models import avatar_thumbnail_exists, avatar_thumbnail_url
@@ -34,6 +35,6 @@ def avatar(user, size=80):
     alt = unicode(user)
     # always use default avatar size and let browser handle resizes
     url = avatar_url(user) 
-    return """<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt, 
-            size, size)
+    return mark_safe("""<img src="%s" alt="%s" width="%s" height="%s" />""" % (url, alt, 
+            size, size))
 register.simple_tag(avatar)
